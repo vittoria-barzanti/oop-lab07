@@ -8,22 +8,25 @@ import it.unibo.inner.test.impl.ProductImpl;
 import java.util.Arrays;
 import java.util.List;
 
+import it.unibo.inner.impl.IterableWithPolicyImpl;
+
 import static it.unibo.inner.test.Assertions.assertContentEqualsInOrder;
 
 public class TestIterableWithPolicy {
 
-    private TestIterableWithPolicy() {}
+    private TestIterableWithPolicy() {
+    }
 
     private static <T> IterableWithPolicy<T> makeIterableWithPolicy(final T[] elements, final Predicate<T> filter) {
-        return null; // TODO: return the implementation of IterableWithPolicy
+        return new IterableWithPolicyImpl<T>(elements, filter); // TODO: return the implementation of IterableWithPolicy
     }
 
     private static <T> IterableWithPolicy<T> makeIterableWithPolicy(final T[] elements) {
-        return null; // TODO: return the implementation of IterableWithPolicy
+        return new IterableWithPolicyImpl<T>(elements); // TODO: return the implementation of IterableWithPolicy
     }
 
     public static void main() {
-        final String[] test1 = { "pippo", "pluto", "foo", "bar" };
+        final String[] test1 = {"pippo", "pluto", "foo", "bar"};
         // Create filters
         final Predicate<String> filterPippoPluto = new Predicate<>() {
             public boolean test(final String elem) {
@@ -70,7 +73,7 @@ public class TestIterableWithPolicy {
         final Product prod3 = new ProductImpl("Prod 3", 20);
         final Product prod4 = new ProductImpl("Prod 4", 35);
         final Product prod5 = new ProductImpl("Prod 5", 450);
-        final Product[] productsTest = { prod1, prod2, prod3, prod4, prod5 };
+        final Product[] productsTest = {prod1, prod2, prod3, prod4, prod5};
         final Predicate<Product> filterAllAvailable = new Predicate<Product>() {
             public boolean test(final Product elem) {
                 return elem.getQuantity() > 0;
